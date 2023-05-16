@@ -16,9 +16,9 @@
 
 function getComputerChoice (){
     let choiceNum = Math.random();
-    let choiceRock = 'Rock';
-    let choicePaper = 'Paper';
-    let choiceScissors = 'Scissors';
+    let choiceRock = 'rock';
+    let choicePaper = 'paper';
+    let choiceScissors = 'scissors';
     if (choiceNum < .33){
         return choiceRock;
     }
@@ -37,9 +37,12 @@ let computerChoice = getComputerChoice();
 let userChoice = '';
 let userWins = 0;
 let userLoss = 0;
+let userTies = 0;
+let gameCount = 0;
+let userName = prompt("Hello and Welcome to Rock, Paper, Scissors! Please enter your first name.");
 
 
-userChoice = prompt("Hello and welcome to Rock Paper Scissors. To play, type in either Rock, Paper or Scissors. Press q to quit anytime.");
+userChoice = prompt("To play, type in either Rock, Paper or Scissors. Press q to quit anytime.");
 
 //input validation function
 
@@ -54,7 +57,64 @@ function userChoiceCheck(userChoice){
     return choiceCheck;
 }
 
-userChoiceCheck(userChoice);
+userChoice = userChoiceCheck(userChoice);
 
-//while(userChoice != 'q' || userChoice != 'Q'){
+//compare to decide winner
+
+function decideWinner(userChoice, computerChoice){
+
+    if(userChoice === 'rock'){
+        if(computerChoice === 'rock'){
+            userTies++;
+            gameCount++;
+            console.log(`Computer chose ${computerChoice}, it's a tie!`);
+        }
+        if(computerChoice === 'paper'){
+            userLoss++;
+            gameCount++;
+            console.log(`Computer chose ${computerChoice}, You lost!`);
+        }
+        if(computerChoice === 'scissors'){
+            userWins++;
+            gameCount++;
+            console.log(`Computer chose ${computerChoice}, You won!`);
+        }
+    } 
+    if(userChoice === 'paper'){
+        if(computerChoice === 'rock'){
+            userWins++;
+            gameCount++;
+            console.log(`Computer chose ${computerChoice}, You won!`);
+        }
+        if(computerChoice === 'paper'){
+            userTies++;
+            gameCount++;
+            console.log("It's a tie!");
+        }
+        if(computerChoice === 'scissors'){
+            userLoss++;
+            gameCount++;
+            console.log(`Computer chose ${computerChoice}, You lost!`);
+        }
+    }
+    if (userChoice === 'scissors'){
+        if(computerChoice === 'rock'){
+            userLoss++;
+            gameCount++;
+            console.log(`Computer chose ${computerChoice}, You lost!`);
+        }
+        if(computerChoice === 'paper'){
+            userWins++;
+            gameCount++;
+            console.log(`Computer chose ${computerChoice}, You won!`);
+        }
+        if(computerChoice === 'scissors'){
+            userTies++;
+            gameCount++;
+            console.log("It's a tie!");
+        }
+    }
+
+
+}
 
