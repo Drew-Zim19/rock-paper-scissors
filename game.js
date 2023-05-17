@@ -32,17 +32,14 @@ function getComputerChoice (){
 
 let computerChoice = getComputerChoice();
 
-//prompt user for input. allow user to quit anytime
+//prompt user for name, allow user to quit anytime
 
 let userChoice = '';
 let userWins = 0;
 let userLoss = 0;
 let userTies = 0;
 let gameCount = 0;
-let userName = prompt("Hello and Welcome to Rock, Paper, Scissors! Please enter your first name.");
-
-
-userChoice = prompt("To play, type in either Rock, Paper or Scissors. Press q to quit anytime.");
+let userName = prompt("Hello and Welcome to Rock, Paper, Scissors! Please enter your first name. To play, type in either Rock, Paper or Scissors. \n\nFive games will be played. Press q to quit anytime.");
 
 //input validation function
 
@@ -57,64 +54,70 @@ function userChoiceCheck(userChoice){
     return choiceCheck;
 }
 
-userChoice = userChoiceCheck(userChoice);
-
-//compare to decide winner
+//function to compare to decide winner
 
 function decideWinner(userChoice, computerChoice){
 
     if(userChoice === 'rock'){
         if(computerChoice === 'rock'){
             userTies++;
-            gameCount++;
-            console.log(`Computer chose ${computerChoice}, it's a tie!`);
+            alert(`Computer chose ${computerChoice}, it's a tie!`);
         }
         if(computerChoice === 'paper'){
             userLoss++;
-            gameCount++;
-            console.log(`Computer chose ${computerChoice}, You lost!`);
+            alert(`Computer chose ${computerChoice}, You lost!`);
         }
         if(computerChoice === 'scissors'){
             userWins++;
-            gameCount++;
-            console.log(`Computer chose ${computerChoice}, You won!`);
+            alert(`Computer chose ${computerChoice}, You won!`);
         }
     } 
     if(userChoice === 'paper'){
         if(computerChoice === 'rock'){
             userWins++;
-            gameCount++;
-            console.log(`Computer chose ${computerChoice}, You won!`);
+            alert(`Computer chose ${computerChoice}, You won!`);
         }
         if(computerChoice === 'paper'){
             userTies++;
-            gameCount++;
-            console.log("It's a tie!");
+            alert("It's a tie!");
         }
         if(computerChoice === 'scissors'){
             userLoss++;
-            gameCount++;
-            console.log(`Computer chose ${computerChoice}, You lost!`);
+            alert(`Computer chose ${computerChoice}, You lost!`);
         }
     }
     if (userChoice === 'scissors'){
         if(computerChoice === 'rock'){
             userLoss++;
-            gameCount++;
-            console.log(`Computer chose ${computerChoice}, You lost!`);
+            alert(`Computer chose ${computerChoice}, You lost!`);
         }
         if(computerChoice === 'paper'){
             userWins++;
-            gameCount++;
-            console.log(`Computer chose ${computerChoice}, You won!`);
+            alert(`Computer chose ${computerChoice}, You won!`);
         }
         if(computerChoice === 'scissors'){
             userTies++;
-            gameCount++;
-            console.log("It's a tie!");
+            alert("It's a tie!");
         }
     }
 
-
 }
+//this will play 5 games if user doesn't quit
+
+if(userChoice != 'q' && userName != 'q'){
+do{
+    userChoice = prompt(`${userName}, please choose Rock, Paper, Scissors or q to quit`);
+    userChoice = userChoiceCheck(userChoice);
+    computerChoice = getComputerChoice();
+
+    if(userChoice != 'q'){
+    decideWinner(userChoice, computerChoice);
+    alert(`The current score is ${userName} ${userWins}, computer ${userLoss}, ${userTies} tie(s). Five games will be played, quit anytime.`);
+    gameCount++;
+    }
+
+} while(gameCount < 5 && userChoice != 'q');
+}
+
+alert(`Final Score: ${userName} ${userWins} win(s), computer ${userLoss} win(s), ${userTies} tie(s). Thanks for playing!`)
 
