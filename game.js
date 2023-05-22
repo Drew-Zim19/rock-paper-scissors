@@ -30,19 +30,22 @@ function getComputerChoice (){
     }
 }
 
-let computerChoice = getComputerChoice();
-
 //prompt user for name, allow user to quit anytime
 
-let userChoice = '';
 let userWins = 0;
 let userLoss = 0;
 let userTies = 0;
 let gameCount = 0;
-let userName = prompt("Hello and Welcome to Rock, Paper, Scissors! Please enter your first name. To play, type in either Rock, Paper or Scissors. \n\nFive games will be played. Press q to quit anytime.");
+let userName = prompt("Hello and welcome to Rock, Paper, Scissors! Please enter your first name.");
+let computerChoice = getComputerChoice();
+let userChoice = '';
+
+alert(`Hi ${userName}! To play, click either Rock, Paper or Scissors. 
+
+Scorekeeping is format W-L-T. First to 5 wins ends the game.`);
 
 //input validation function
-
+/*
 function userChoiceCheck(userChoice){
 
     let choiceCheck = userChoice.toString().toLowerCase();
@@ -53,71 +56,136 @@ function userChoiceCheck(userChoice){
     }
     return choiceCheck;
 }
+*/
 
-//function to compare to decide winner
+//userchoice
+const body = document.body;
+const div = document.createElement('div');
+body.append(div);
 
-function decideWinner(userChoice, computerChoice){
+//function to compare to decide winner 
 
+function playRound(userChoice, computerChoice){
+  if(userWins < 5 && userLoss < 5){
     if(userChoice === 'rock'){
         if(computerChoice === 'rock'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Rock. You tied!';
+            div.appendChild(resultText);
             userTies++;
-            alert(`Computer chose ${computerChoice}, it's a tie!`);
+            gameCount++;
+            results();
         }
         if(computerChoice === 'paper'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Paper. You lost!';
+            div.appendChild(resultText);
             userLoss++;
-            alert(`Computer chose ${computerChoice}, You lost!`);
+            gameCount++;
+            results();
         }
         if(computerChoice === 'scissors'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Scissors. You won!';
+            div.appendChild(resultText);
             userWins++;
-            alert(`Computer chose ${computerChoice}, You won!`);
+            gameCount++;
+            results();
         }
     } 
     if(userChoice === 'paper'){
         if(computerChoice === 'rock'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Rock. You won!';
+            div.appendChild(resultText);
             userWins++;
-            alert(`Computer chose ${computerChoice}, You won!`);
+            gameCount++;
+            results();
         }
         if(computerChoice === 'paper'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Paper. You tied!';
+            div.appendChild(resultText);
             userTies++;
-            alert("It's a tie!");
+            gameCount++;
+            results();
         }
         if(computerChoice === 'scissors'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Scissors. You lost!';
+            div.appendChild(resultText);
             userLoss++;
-            alert(`Computer chose ${computerChoice}, You lost!`);
+            gameCount++;
+            results();
         }
     }
     if (userChoice === 'scissors'){
         if(computerChoice === 'rock'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Rock. You lost!';
+            div.appendChild(resultText);
             userLoss++;
-            alert(`Computer chose ${computerChoice}, You lost!`);
+            gameCount++;
+            results();
         }
         if(computerChoice === 'paper'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Paper. You won!';
+            div.appendChild(resultText);
             userWins++;
-            alert(`Computer chose ${computerChoice}, You won!`);
+            gameCount++;
+            results();
         }
         if(computerChoice === 'scissors'){
+            const resultText = document.createElement('p');
+            resultText.textContent = 'Computer chose Scissors. You tied!';
+            div.appendChild(resultText);
             userTies++;
-            alert("It's a tie!");
+            gameCount++;
+            results();
         }
     }
-
+} else{
+    endGame();
 }
-//this will play 5 games if user doesn't quit
+}
 
-if(userChoice != 'q' && userName != 'q'){
-do{
-    userChoice = prompt(`${userName}, please choose Rock, Paper, Scissors or q to quit`);
-    userChoice = userChoiceCheck(userChoice);
+//function to display total results
+
+function results(){
+    const gameCountText = document.createElement('p');
+    gameCountText.textContent = `You have played ${gameCount} game(s). The score is ${userWins}-${userLoss}-${userTies} versus the computer.`;
+    div.appendChild(gameCountText);
+}
+
+//event listeners on buttons to trigger user input
+
+document.getElementById("rock").addEventListener("click", () => {
+    userChoice = 'rock';
     computerChoice = getComputerChoice();
+    playRound(userChoice, computerChoice);
+    
+});
 
-    if(userChoice != 'q'){
-    decideWinner(userChoice, computerChoice);
-    alert(`The current score is ${userName} ${userWins}, computer ${userLoss}, ${userTies} tie(s). Five games will be played, quit anytime.`);
-    gameCount++;
-    }
+document.getElementById("paper").addEventListener("click", () => {
+    userChoice = 'paper';
+    computerChoice = getComputerChoice();
+    playRound(userChoice, computerChoice);
 
-} while(gameCount < 5 && userChoice != 'q');
+});
+
+document.getElementById("scissors").addEventListener("click", () => {
+    userChoice = 'scissors';
+    computerChoice = getComputerChoice();
+    playRound(userChoice, computerChoice);
+
+});
+
+// function to end the game once the computer or user reaches 5 wins
+
+function endGame(){
+    const gameEnd = document.createElement('p');
+    gameEnd.textContent = 'One of the players has reached 5 wins. The game is over. Thanks for playing!';
+    div.appendChild(gameEnd);
 }
-
-alert(`Final Score: ${userName} ${userWins} win(s), computer ${userLoss} win(s), ${userTies} tie(s). Thanks for playing!`)
 

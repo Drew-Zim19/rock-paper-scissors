@@ -1,0 +1,41 @@
+.container{
+    display: flex;
+    max-height: 150px;
+    justify-content: space-evenly;
+}
+
+.rock{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    background-color: slategray;
+    font-weight: bold;
+    font-size: larger;
+    border-style: solid;
+    border-width: medium;
+    border-color: black;
+    border-radius: 4px;
+}
+
+.paper{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    font-weight: bold;
+    font-size: larger;
+    border-style: dashed;
+    border-width: medium;
+    border-color: pink;
+    border-radius: 4px;
+}
+.scissors{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    font-weight: bold;
+    font-size: larger;
+    border-style: dotted;
+    border-width: medium;
+    border-color: teal;
+    border-radius: 4px;
+}
