@@ -4,7 +4,7 @@
     justify-content: space-evenly;
 }
 
-.rock{
+.rock1{
     display: flex;
     flex-direction: column;
     padding: 8px;
@@ -17,7 +17,7 @@
     border-radius: 4px;
 }
 
-.paper{
+.paper1{
     display: flex;
     flex-direction: column;
     padding: 8px;
@@ -28,7 +28,7 @@
     border-color: pink;
     border-radius: 4px;
 }
-.scissors{
+.scissors1{
     display: flex;
     flex-direction: column;
     padding: 8px;
